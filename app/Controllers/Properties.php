@@ -11,6 +11,8 @@ class Properties extends BaseController
         $db = db_connect();
         $property = new PropertyDetailsModel($db);
         $props = $property->getPropertyDetails(2);
+
+        //Only for display purposes
         echo "<pre>";
         print_r($props);
         echo "</pre>";
