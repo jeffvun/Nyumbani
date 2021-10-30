@@ -15,12 +15,13 @@ class PropertyDetailsModel{
         //Initializing query builder
         $builder = $this->db->table('tbl_property');
         $builder->join("tbl_users", "tbl_property.tenantID = tbl_users.userID",  "left");
+        $builder->join("tbl_propertymedia", "tbl_property.propertyID = tbl_propertymedia.propertyID", "left");
         $builder->join("tbl_propertydetails", "tbl_property.propertyID = tbl_propertydetails.propertyID",  "left");
-        $builder->join("tbl_propertymedia", "tbl_propertydetails.propertyID = tbl_propertymedia.propertyID",  "left");
         $builder->where("ownerID", $id);
         $query=$builder->get();
 
         return $query->getResult();
+
     }
 
 }
