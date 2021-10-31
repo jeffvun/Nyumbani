@@ -1,0 +1,35 @@
+.container{
+    width:900px;
+    color:black;
+    background-color:aquamarine;
+    padding:0px;
+    margin-top:253px;
+    overflow-x:scroll;
+}
+table {
+    width:100%;
+	margin:auto;
+	border:rgb(0, 0, 8) 3px solid;
+}
+td {
+	text-align:center;
+	padding:10px;
+    border:rgb(0, 0, 0) 1px solid;
+}
+.td_title {
+	text-align:center;
+    border:rgb(0, 0, 0) 2px solid;
+}
+.title {
+	color:rgb(0, 0, 0);
+	font-size:20px;
+    font-family: cursive;
+}
+#button{
+    color: white;
+	background-color: #031a26;
+	border: none;
+	height:40px;
+	width:60px;
+	border-radius: 15px;
+}
