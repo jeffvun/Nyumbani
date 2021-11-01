@@ -18,17 +18,12 @@ class ApplicationsModel extends Model{
     # Provided the propertyOwner is logged into the system with ownerid=$id
     public function getApplications($id){
 
-        $App = 'tbl_applications'; 
-        $Users = 'tbl_users';
-        $Lists ='tbl_listings';
-        $Prop ='tbl_property';
-
-        $builder = $this->db->table($App);
-        $builder->select($Users.'firstName', $Users.'email', $Prop.'propertyDescription', $App.'application_date');
-        $builder->join($Users,"tbl_applications.applicantID = tbl_users.userID");
-        $builder->join($Lists,"tbl_applications.listingID = tbl_listings.listingID");
-        $builder->join($Prop, $Lists."propertyID = tbl_property.propertyID");
-        $builder->where($Prop.'ownerID', $id);
+        $builder = $this->db->table('tbl_applications');
+        $builder->select("tbl_users.firstName, tbl_users.email, tbl_property.propertyDescription, tbl_applications.application_date");
+        $builder->join("tbl_users","tbl_applications.applicantID = tbl_users.userID");
+        $builder->join("tbl_listings","tbl_applications.listingID = tbl_listings.listingID");
+        $builder->join("tbl_property", "tbl_listings.propertyID = tbl_property.propertyID");
+        $builder->where("tbl_property.ownerID", $id);
     
         $data = $builder->get()->getResult();
 
