@@ -24,9 +24,9 @@ class ApplicationsModel extends Model{
 
         $builder = $this->db->table($App);
         $builder->select($Users.'firstName', $Users.'email', $Prop.'propertyDescription', $App.'application_date');
-        $builder->join($Users, $App.'applicantID' = $Users.'userID');
-        $builder->join($Lists, $App.'listingID' = $Lists.'listingID');
-        $builder->join($Prop, $Lists.'propertyID' = $Prop.'propertyID');
+        $builder->join($Users, $App.'applicantID' = "tbl_users.userID");
+        $builder->join($Lists, $App.'listingID' = "tbl_listings.listingID");
+        $builder->join($Prop, $Lists.'propertyID' = "tbl_property.propertyID");
         $builder->where($Prop.'ownerID', $id);
     
         $data = $builder->get()->getResult();
