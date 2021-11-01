@@ -42,7 +42,7 @@ $paths = new Config\Paths();
 chdir(FCPATH);
 
 $bootstrap = rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
-$app       = require realpath($bootstrap) ?: $bootstrap;
+$app     = require realpath($bootstrap) ?: $bootstrap;
 
 // Grab our Console
 $console = new CodeIgniter\CLI\Console($app);
