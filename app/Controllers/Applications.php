@@ -10,12 +10,12 @@ class Applications extends BaseController{
         $db = db_connect();
         $application = new ApplicationsModel($db); 
         $results = $application->getApplications(1);
-        
+
         echo "<pre>";
         print_r($results);
         echo "</pre>"; 
-        $data = ['Applications'=>json_encode($results)];
+        $data = ['ViewApplications'=>json_encode($results)];
 
-        return view('Applications', $data);
+        return view('ViewApplications', $data);
     }
 }
