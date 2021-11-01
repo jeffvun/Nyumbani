@@ -35,7 +35,7 @@
                     <tr>
                         <td><label><?php echo $row->firstName; ?></label></td>
                         <td><label><?php echo $row->email; ?></label></td>
-                        <td><label><?php echo $row->property; ?></label></td>
+                        <td><label><?php echo $row->propertyDescription; ?></label></td>
                         <td><label><?php echo $row->application_date; ?></label></td>
                         <td>
                             <button id="button">
