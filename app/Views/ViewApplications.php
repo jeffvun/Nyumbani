@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $applications_decoded = json_decode($Applications);
+                    <?php $applications_decoded = json_decode($applications);
                     foreach($applications_decoded as $row):?>    
                     <tr>
                         <td><label><?php echo $row->firstName; ?></label></td>
