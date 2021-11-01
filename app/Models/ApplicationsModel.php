@@ -13,14 +13,15 @@ class ApplicationsModel extends Model{
         $this->db = & $db;
     }
     
-    protected $App = 'tbl_applications'; 
-    protected $Users = 'tbl_users';
-    protected $Lists ='tbl_listings';
-    protected $Prop ='tbl_property';
 
     # get all applications from all the properties of propertyowner
     # Provided the propertyOwner is logged into the system with ownerid=$id
     public function getApplications($id){
+
+        protected $App = 'tbl_applications'; 
+        protected $Users = 'tbl_users';
+        protected $Lists ='tbl_listings';
+        protected $Prop ='tbl_property';
 
         $builder = $this->db->table($App);
         $builder->select($Users.'firstName', $Users.'email', $Prop.'propertyDescription', $App.'application_date');
