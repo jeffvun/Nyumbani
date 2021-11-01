@@ -1,13 +1,12 @@
 <?php 
 
 namespace App\Models;
-
 use CodeIgniter\Model;
 use CodeIgniter\Database\ConnectionInterface;
 
 class ApplicationsModel extends Model{
 
-    private $db;
+    protected $db;
 
     public function __construct(ConnectionInterface &$db) {
         // $this->db = db_connect();  Loading database
