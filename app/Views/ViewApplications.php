@@ -17,7 +17,7 @@
         <div>
             <h3>Applications</h3>
         </div>
-        <hr/><br>
+        <hr/>
         <div class="container">
             <table >
                 <thead>
@@ -40,7 +40,7 @@
                         <td>
                             <button id="button">
                                 <?php 
-                                echo '<a href="#?upuser='.$id. '" class="edit">Details</a>'; ?>
+                                echo '<a href="#" class="edit">Details</a>'; ?>
                             </button>
                         </td> 
                     </tr>
