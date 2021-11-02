@@ -4,25 +4,23 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class RequestsModel extends Model{
-    private $db;
+    protected $db;
 
     public function __construct() {
         $this->db = db_connect(); // Loading database
     }
 
-    protected $table = 'tbl_requets'; 
-    protected $Users = 'tbl_users';
-    protected $Prop ='tbl_property';
-
     # get all requests from all the properties of the propertyowner
     # Provided the propertyOwner is logged into the system with ownerid=$id
     public function getRequests($id){
 
-        $builder = $this->db->table($table);
-        $builder->select($Users.'firstName', $table.'requestMessage', $Prop.'propertyPhysicalAddress', $table.'dateRequested', $table.'dateCompleted');
-        $builder->join($Prop, $table.'propertyID' = $Prop.'propertyID');
-        $builder->join($Users, $Prop.'TenantID' = $Users.'userID');
-        $builder->where($Prop.'ownerID', $id);
+        $builder = $this->db->table('tbl_requests');
+
+        $builder->select
+        ('tbl_users.firstName, tbl_requests.dateRequested, tbl_requests.dateCompleted, tbl_property.propertyPhysicalAddress, tbl_requests.requestMessage');
+        $builder->join('tbl_property', 'tbl_requests.propertyID = tbl_property.propertyID');
+        $builder->join('tbl_users', 'tbl_property.TenantID = tbl_users.userID');
+        $builder->where('tbl_property.ownerID', $id);
     
         $data = $builder->get()->getResult();
 

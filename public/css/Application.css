@@ -3,7 +3,7 @@
     color:black;
     background-color:aquamarine;
     padding:0px;
-    margin-top:253px;
+    margin-top:25px;
     overflow-x:scroll;
 }
 table {
@@ -27,9 +27,13 @@ td {
 }
 #button{
     color: white;
-	background-color: #031a26;
+	background-color: #644a03;
 	border: none;
 	height:40px;
 	width:60px;
 	border-radius: 15px;
+}
+.edit{
+	color: white;
+	text-decoration: none;
 }
