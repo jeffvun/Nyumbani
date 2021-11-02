@@ -1,17 +1,23 @@
 <?php
 
 namespace App\Controllers;
-use CodeIgniter\Controller;
+use App\Models\RequestsModel;
 
 class Requests extends BaseController{
 
-    private $request ='';
-    public function __construct(){
-        $this->request = new RequestsModel();       
-    }
     public function index(){
+        $request = new RequestsModel(); 
         $results = $request->getRequests(1); 
-        $data = ['Requests'=>json_encode($results)];
-        echo view('Request', $data);
+
+        return json_encode($results);
+        
+        #For Testing Purporse
+        // echo "<pre>";
+        // print_r($results);
+        // echo "</pre>"; 
+
+        // $data = ['ViewRequests'=>json_encode($results)];
+
+        // return view('ViewRequests', $data);
     }
 }

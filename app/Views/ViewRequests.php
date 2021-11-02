@@ -23,26 +23,26 @@
                 <thead>
                     <tr class="title">
                         <td class="td_title">Name</td>
-                        <td class="td_title">Message</td>
-                        <td class="td_title">Property</td>
                         <td class="td_title">Date Open</td>
                         <td class="td_title">Date Closed</td>
+                        <td class="td_title">Request</td>
+                        <td class="td_title">Property</td>
                         <td class="td_title">Details</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $requests_decoded = json_decode($requests);
+                    <?php $requests_decoded = json_decode($ViewRequests);
                     foreach($requests_decoded as $row):?>    
                     <tr>
                         <td><label><?php echo $row->firstName; ?></label></td>
-                        <td><label><?php echo $row->requestMessage; ?></label></td>
-                        <td><label><?php echo $row->propertyPhysicalAddress; ?></label></td>
                         <td><label><?php echo $row->dateRequested; ?></label></td>
                         <td><label><?php echo $row->dateCompleted; ?></label></td>
+                        <td><label><?php echo $row->propertyPhysicalAddress; ?></label></td>
+                        <td><label><?php echo $row->requestMessage; ?></label></td>
                         <td>
                             <button id="button">
                                 <?php 
-                                echo '<a href="#?upuser='.$id. '" class="edit">Details</a>'; ?>
+                                echo '<a href="#" class="edit">Details</a>'; ?>
                             </button>
                         </td> 
                     </tr>
