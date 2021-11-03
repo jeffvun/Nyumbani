@@ -5,7 +5,7 @@ use CodeIgniter\Database\ConnectionInterface;
 class PropertyDetailsModel{
 
     protected $db;
-    
+
     //Set the db variable to the reference of connected db
     public function __construct(ConnectionInterface &$db){
         $this->db = & $db;
