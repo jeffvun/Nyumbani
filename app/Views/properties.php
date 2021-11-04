@@ -16,13 +16,15 @@
     foreach($properties_decoded as $property):?>
 
     <div style="background: pink; width: 500px; margin:50px">
-        <img src="uploads/images/properties/<?= $property->thumbnailPhoto?>" width="500">
+        <img src="<?=base_url('uploads/images/properties/'.$property->thumbnailPhoto)?>"
+            alt='uploads/images/properties/<?= $property->thumbnailPhoto?>' width="500">
 
         <div>
             <h2>Status: <?php $status = $property->availability==1?"Vacant": "Occupied"; echo $status; ?></h2>
             <h3>Generated Title: <span style="color: green">
                     <?=$property->bedrooms." bedroom ".$property->propertyType." in ".$property->propertyCounty ?></span>
             </h3>
+            <h4>ID = <?= $property->propertyID?></h4>
         </div>
 
         <div>

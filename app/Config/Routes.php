@@ -32,9 +32,17 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/properties/(:num)', 'properties::index/$1');
+$routes->match(['get','post'],'dummyview', 'AddProperty::dummyview');
+$routes->match(['get','post'],'index', 'AddProperty::index');
+
 
 $routes->get('/Applications/(:num)','Applications/index/$1');
 $routes->get('/Requests/(:num)','Requests/index/$1'); 
+
+$routes->match(['get','post'],'dummyview', 'AddProperty::dummyview');
+$routes->match(['get','post'],'index', 'AddProperty::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
