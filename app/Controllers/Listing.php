@@ -6,17 +6,20 @@ use App\Models\PropertyListingModel;
 
 class Listing extends BaseController
 {
-    public function index()
+    public function index($id)
     {
         $db = db_connect();
         $property = new PropertyListingModel($db);
-        $props = $property->getPropertyListing(2);
+        $lists = $property->getPropertyListing($id);
+
+        // return json_encode($results);
 
         //Only for display purposes
         echo "<pre>";
-        print_r($props);
+        print_r($lists);
         echo "</pre>";
-        // $data = ['properties'=>json_encode($props)];
-        // return view('properties', $data);
+
+        $data = ['listings'=>json_encode($lists)];
+        return view('listings', $data);
     }
 }

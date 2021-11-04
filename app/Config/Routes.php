@@ -35,6 +35,7 @@ $routes->get('/', 'Home::index');
 
 $routes->get('/Applications/(:num)','Applications/index/$1');
 $routes->get('/Requests/(:num)','Requests/index/$1');
+$routes->get('/Listing/(:num)','Listing/index/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
