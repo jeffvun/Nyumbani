@@ -17,7 +17,6 @@ class Applications extends BaseController{
         // echo "<pre>";
         // print_r($results);
         // echo "</pre>"; 
-        
         // $data = ['ViewApplications'=>json_encode($results)];
 
         // return view('ViewApplications', $data);
