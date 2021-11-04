@@ -6,11 +6,11 @@ use App\Models\PropertyListingModel;
 
 class Listing extends BaseController
 {
-    public function index($id)
+    public function index()
     {
         $db = db_connect();
         $property = new PropertyListingModel($db);
-        $lists = $property->getPropertyListing($id);
+        $lists = $property->getPropertyListing(2);
 
         // return json_encode($results);
 

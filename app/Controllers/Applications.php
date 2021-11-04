@@ -6,10 +6,10 @@ use App\Models\ApplicationsModel;
 class Applications extends BaseController{
 
     // Testing the view
-    public function index($id){
+    public function index(){
         $db = db_connect();
         $application = new ApplicationsModel($db); 
-        $results = $application->getApplications($id);
+        $results = $application->getApplications(1);
 
         // return json_encode($results);
 

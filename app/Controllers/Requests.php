@@ -5,9 +5,9 @@ use App\Models\RequestsModel;
 
 class Requests extends BaseController{
 
-    public function index($id){
+    public function index(){
         $request = new RequestsModel(); 
-        $results = $request->getRequests($id); 
+        $results = $request->getRequests(1); 
 
         // return json_encode($results);
         
