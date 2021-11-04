@@ -15,7 +15,7 @@
     </nav>
     <main>
         <div>
-            <h3>Applications</h3>
+            <h3>Listings</h3>
         </div>
         <hr/>
         <div class="container">
