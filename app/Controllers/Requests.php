@@ -6,7 +6,6 @@ use App\Models\RequestsModel;
 class Requests extends BaseController{
 
     public function index(){
-        $db = db_connect();
         $request = new RequestsModel(); 
         $results = $request->getRequests(1); 
 
