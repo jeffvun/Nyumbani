@@ -13,7 +13,29 @@ class Properties extends BaseController
         $props = $property->getPropertyDetails($id);
         return json_encode($props);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         //Only for display purposes
+
         // echo "<pre>";
         // print_r($props);
         // echo "</pre>";

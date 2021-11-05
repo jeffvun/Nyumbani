@@ -70,14 +70,14 @@ class AddProperty extends BaseController{
         'landSize' => $landSize,
         'bedrooms' => $rooms,
         'bathrooms' => $bathrooms,
-      ]
+      ];
       // I have ignored dateBuilt and propertyFeatures for now
 
       // For PropertyMedia
       $data3 = [
         'videoLink' => $videoLink,
         'otherImages' => $otherImage,
-      ]
+      ];
 
       //Working with Models
 
