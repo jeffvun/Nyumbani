@@ -1,56 +1,66 @@
 <?php
 //taking a json as the parameter
 //json is decoded and split into separate variables
-//variables are validated
-//As of now assuming frontend validation
 //After validation the model is used to insert them into the database
 
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Property;
+use App\Models\PropertyModel;
 use App\Models\PropertyDetails;
 use App\Models\PropertyMedia;
 
+
 class AddProperty extends BaseController{
 
+
     public function index() {
+
       //Dummy data used to work on models
-      //Ideally should be passed in as a parameter in index()
+
       $json = '{
-                  "ownerID": "7",
-                  "propertyType": "Villa",
-                  "propertyCounty": "Kisumu",
-                  "propertyPhysicalAddress": "Tempore similique a",
-                  "propertyDescription": "Elit placeat quide",
-                  "propertyRent": "Ipsum pariatur Tot",
-                  "propertySize": "18",
-                  "landSize": "97",
-                  "bedrooms": "5",
-                  "bathrooms": "5",
-                  "elevator": [
-                    "1"
-                  ],
-                  "parking": [
-                    "1"
-                  ]
-                }';
+        "ownerID": "2",
+        "thumbnailPhoto": "test path",
+        "propertyType": "Villa",
+        "propertyCounty": "Mombasa",
+        "propertyPhysicalAddress": "Tempore maxime dolo",
+        "propertyDescription": "Molestias culpa dolo",
+        "propertyRent": "Est incidunt doloru",
+        "otherImages": "test path",
+        "dateBuilt": "24-12-2020",
+        "videoLink": "www.wecyve.org",
+        "propertySize": "15",
+        "landSize": "22",
+        "bedrooms": "5",
+        "bathrooms": "2",
+        "propertyFeatures": {"balcony": [
+          "1"
+        ],
+        "elevator": [
+          "1"
+        ],
+        "wheelchair": [
+          "1"
+        ]}
+      }';
+
+
       $assoc_array = json_decode($json, true);
-      print_r ($assoc_array);
-      //Having issues moving links using JSON
       $ownerID = $assoc_array['ownerID'];
-      //$thumbnailPhoto = $assoc_array['thumbnailPhoto'];
+      $thumbnailPhoto = $assoc_array['thumbnailPhoto'];
       $propertyType = $assoc_array['propertyType'];
       $propertyPhysicalAddress = $assoc_array['propertyPhysicalAddress'];
       $propertyDescription = $assoc_array['propertyDescription'];
+      $dateBuilt = $assoc_array['dateBuilt'];
       $propertyCounty = $assoc_array['propertyCounty'];
       $propertyRent = $assoc_array['propertyRent'];
-      //$otherPhotos = $assoc_array['otherPhotos'];
-      //$videoLink = $assoc_array['videoLink'];
+      $otherImages = $assoc_array['otherImages'];
+      $videoLink = $assoc_array['videoLink'];
       $propertySize = $assoc_array['propertySize'];
       $landSize = $assoc_array['landSize'];
       $bedrooms = $assoc_array['bedrooms'];
       $bathrooms = $assoc_array['bathrooms'];
-      echo $ownerID;
+      $propertyFeatures = $assoc_array['propertyFeatures'];
 
       //Splitting the incoming data into appropriate arrays for passing to Models
 
@@ -62,40 +72,41 @@ class AddProperty extends BaseController{
           'propertyPhysicalAddress'    => $propertyPhysicalAddress,
           'propertyType' => $propertyType,
           'propertyRent'    => $propertyRent,
-      ];
-      //No thumbnailPhoto yet...Working on it
-
-      //For PropertyDetailsModel
-      $data2 = [
-        'landSize' => $landSize,
-        'bedrooms' => $rooms,
-        'bathrooms' => $bathrooms,
-      ];
-      // I have ignored dateBuilt and propertyFeatures for now
-
-      // For PropertyMedia
-      $data3 = [
-        'videoLink' => $videoLink,
-        'otherImages' => $otherImage,
+          'thumbnailPhoto' => $thumbnailPhoto,
       ];
 
       //Working with Models
-
       $db = db_connect();
-      $propertyModel = new Property($db);
-      // $propertydetailsModel = new PropertyDetails($db);
-      // $propertymediaModel = new PropertyMedia($db);
-      $propertyModel->insert($data1);
-      // $propertydetailsModel->insert($data2);
-      // $propertymediaModel->insert($data3);
+      $propertyModel = new PropertyModel($db);
+      $propertydetailsModel = new PropertyDetails($db);
+      $propertymediaModel = new PropertyMedia($db);
+      $propertyID = $propertyModel->addProperty($data1);
 
-      //Waiting for database guys to review request to merge all tables
-      //that contain property information into one...
-      //So far only inserting into one table
+      //For PropertyDetailsModel
+      $data2 = [
+        'propertyID' => $propertyID,
+        'landSize' => $landSize,
+        'propertySize' => $propertySize,
+        'bedrooms' => $bedrooms,
+        'bathrooms' => $bathrooms,
+        'dateBuilt' => $dateBuilt,
+        'propertyFeatures' => $propertyFeatures,
+      ];
+      $propertydetailsModel->insert($data2);
 
+      // For PropertyMedia
+      $data3 = [
+        'propertyID' => $propertyID,
+        'otherImages'=> $otherImages,
+        'videoLink'=> $videoLink,
+      ];
+      $propertymediaModel->insert($data3);
+
+      return 'Success';
     }
 
     public function dummyview() {
       echo view('addpropertydummyview');
     }
+
 }
