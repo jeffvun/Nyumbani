@@ -14,35 +14,42 @@ class PaymentModel
 	
 			$this->db = & $db;
 		}
-// Function to wuery database to get details required for page 14 of the wireframes provided
+// Function to query database to get details required for page 14 of the wireframes provided ---Stays
         public function extract($propertyID)
         {
-            return $this->db->table('tbl_payments')
-                            ->where('tbl_payments.propertyID', $propertyID)
-                            ->join('tbl_property', 'tbl_property.propertyID = tbl_payments.propertyID')
-                            ->join('tbl_users', 'tbl_users.userID = tbl_property.tenantId')
-                            ->get()
-                            ->getResultArray();
-        }
+            
+            $builder = $this->db->table('tbl_property')
+                                ->select("tbl_property.propertyID,tbl_property.ownerID,tbl_property.tenantID,
+                                    tbl_property.propertyDescription,tbl_property.propertyCounty,tbl_property.propertyPhysicalAddress,
+                                    tbl_property.propertyType,tbl_property.thumbnailPhoto,tbl_property.rentDueDate,tbl_property.dateRented,
+                                    tbl_users.firstName as tenantFirstName, tbl_users.lastName as tenantLastName,tbl_users.email as tenantEmail")
+                                ->where('tbl_property.propertyID', $propertyID)
+                                ->join('tbl_users', 'tbl_users.userID = tbl_property.tenantId','left')
+                                ->get()
+                                ->getRow();
 
-/*        public function rentDue($propertyID)
-        {
-            return $this->db->table('tbl_property')
-                    ->select('tbl_property.propertyID, tbl_property.ownerID,
-                        tbl_property.propertyRent,tbl_property.rentDueDate, tbl_property.dateRented, tbl_payments.paymentDate')
-                    ->join('tbl_payments','tbl_property.propertyID = tbl_payments.propertyID','left')
-                    ->where(['tbl_payments.propertyID'=>$propertyID])
-                    ->get()
-                    ->getResult();
-        }
-*/
+            $payments = $this->db->table('tbl_payments')
+                                            ->where('tbl_payments.propertyID', $propertyID)
+                                            ->get()
+                                            ->getResult();
+
+            if (!empty($builder)) {
+                $builder->payments= $payments;
+            }else
+            {
+                $builder ="Property does not exist";
+            }
+
+            return $builder;
+
+}
 
 //Get 
         public function rentCalcs($propertyID)
         {
             return $this->db->table('tbl_property')
                            ->select('tbl_property.propertyID, tbl_property.ownerID,tbl_property.propertyRent,tbl_property.rentDueDate, tbl_property.dateRented')
-                            ->where(['propertyID'=> $propertyID])
+                            ->where(['propertyID'=> $propertyID, 'dateRented !='=> NULL])
                             ->get()
                             ->getResult();
         }
@@ -57,7 +64,7 @@ class PaymentModel
                             ->selectMin('dateRented')
                             ->where(['ownerID'=>$ownerID, 'tenantID !='=> NULL])
                             ->get()
-                            ->getResult()[0]
+                            ->getRow()
                             ;
         }   
 
@@ -153,9 +160,9 @@ class PaymentModel
 
             return $totalRentPaid;
         }
-	
-	
-	//Fetching All Payments
+
+
+//Fetching All Payments
         function fetch_data($ownerID)
         {
             $query = $this->db->table("tbl_payments")->where(["senderID"=>$ownerID,])->orWhere("recipientID",$ownerID)->get()->getResult();
@@ -163,7 +170,22 @@ class PaymentModel
         }
 
 
+        function isOwner($userID)
+        {
+            $builder = $this->db->table('tbl_property')
+                                ->where(["tbl_property.ownerID"=> $userID])
+                                ->get()
+                                ->getResult();
+            
+            if (empty($builder)) {
+                $bool = false;
+            }else
+            {
+                $bool = true;
+            }
 
+            return $bool;
+        }
 
 
 }

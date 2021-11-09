@@ -104,10 +104,11 @@ class Payments extends BaseController
 
             return $data;
         }
-        /*else
+        else
         {
-            return 0;
-        }*/
+            $data =["rentStatus" => NULL, "rentArrears" =>Null];
+            return $data;
+        }
     }
 
 
@@ -198,24 +199,6 @@ class Payments extends BaseController
 
 
 /*View Producing functions are here till the end*/
-    
-    //Page 13 of the views Data
-    public function getTransactions($ownerID){
-            $db = db_connect();
-            $model = new paymentModel($db);
-
-            
-            $data["fetch_data"] = $model->fetch_data($ownerID);
-
-/*            echo "<pre>";
-                print_r($data);
-            echo "</pre>";*/
-
-            
-            return json_encode($data["fetch_data"]);
-             //echo view("payments_view1", $data);
-       }
-
     //Functions to produce the data required on Page 14 of  thie wireframes provided
     public function extract($propertyID)
     {
@@ -223,18 +206,22 @@ class Payments extends BaseController
         $model = new PaymentModel($db);
 
         $result = $model->extract($propertyID);
+        $rentStatus = $this->rentStatus($propertyID);
 
+
+        if (!is_string($result)) {
         
+            if (!is_null($rentStatus["rentStatus"])) {
+                $result->rentStatus = $rentStatus["rentStatus"];
+                $result->rentArrears = $rentStatus["rentArrears"];
+            }else
+            {
+                $result->rentStatus = null;
+                $result->rentArrears = null;
+            }
 
-        if (count($result) >0) {
-           $result = $result[0];
-           $result =array_merge($result, $this->rentStatus($propertyID));
-       
         }
 
-       /* echo "<pre>";
-        print_r($result);
-        echo "</pre>";*/
 
         return json_encode($result);
     }
@@ -246,6 +233,14 @@ class Payments extends BaseController
 
         $db = db_connect();
         $model = new PaymentModel($db);
+
+        $owner = $model->isOwner($ownerID);
+
+       
+
+        if ($owner == true) {
+            // code...
+
 
         //Get total rent Paid
         $totalRentPaid = $model->getPropertyIDs($ownerID);
@@ -267,14 +262,35 @@ class Payments extends BaseController
             'monthlyExpectedRent'=>$monthlyExpectedRent,
             'monthRentReturn'=> $monthRentReturn,
             'fromDate'=>$fromDate
-
             ];
+
+        }else
+        {
+            $result = "Not Properties to show";
+        }
 
 
         return json_encode($result);
-
-
+        
     }
+
+
+//Page 13 of the views Data
+    public function getTransactions($ownerID){
+            $db = db_connect();
+            $model = new paymentModel($db);
+
+            
+            $data["fetch_data"] = $model->fetch_data($ownerID);
+
+/*            echo "<pre>";
+                print_r($data);
+            echo "</pre>";*/
+
+            
+            return json_encode($data["fetch_data"]);
+             //echo view("payments_view1", $data);
+       }
 
 
 }
