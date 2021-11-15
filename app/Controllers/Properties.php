@@ -21,26 +21,6 @@ class Properties extends BaseController
         // return json_encode($props);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
         //Only for display purposes
 

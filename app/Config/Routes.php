@@ -33,7 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/properties/(:num)', 'properties::index/$1');
-$routes->get('/Listing/(:num)','Listing/index/$1');
+$routes->get('/listing/(:num)','Listing::index/$1');
+$routes->get('/listings','Listing::getListings');
+$routes->get('/listings/(:num)','Listing::getSingleListing/$1');
+
+
 
 $routes->match(['get','post'],'/addproperty/dummyview', 'AddProperty::dummyview');
 $routes->match(['get','post'],'/addproperty', 'AddProperty::index');
