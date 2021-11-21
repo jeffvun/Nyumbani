@@ -20,7 +20,7 @@ class AddProperty extends BaseController{
 
       $json = '{
         "ownerID": "2",
-        "thumbnailPhoto": "test path",
+        "thumbnailPhoto": "test: path",
         "propertyType": "Villa",
         "propertyCounty": "Mombasa",
         "propertyPhysicalAddress": "Tempore maxime dolo",
