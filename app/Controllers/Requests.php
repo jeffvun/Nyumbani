@@ -8,9 +8,9 @@ class Requests extends BaseController{
 
     use ResponseTrait;
 
-    public function index(){
+    public function index($id){
         $request = new RequestsModel(); 
-        $results = $request->getRequests(1); 
+        $results = $request->getRequests($id); 
 
         return $this->respond($results);
         

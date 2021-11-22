@@ -10,11 +10,11 @@ class Applications extends BaseController{
     use ResponseTrait;
 
     // Testing the view
-    public function index(){
+    public function index($id){
         $db = db_connect();
         $application = new ApplicationsModel($db);     
 
-        $results = $application->getApplications(1);
+        $results = $application->getApplications($id);
 
         return $this->respond($results);
 
