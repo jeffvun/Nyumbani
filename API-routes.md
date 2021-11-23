@@ -28,4 +28,4 @@
 **Requests**
 
 - `/requests/?`
->Gets properties belonging to single user
+>Gets all requests for a single property owner
