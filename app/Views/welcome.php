@@ -44,7 +44,7 @@
 
 
 
-    <h3>Listings</h3>
+    <h3>Requests</h3>
 
     /requests/?
     <p class="desc">Gets properties belonging to single user
