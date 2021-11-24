@@ -222,8 +222,10 @@ class Payments extends BaseController
 
         }
 
-
-        return json_encode($result);
+        $data = ['data' => json_encode($result)];
+ 
+        //If you want to output Stuff in your browser directly
+        //return json_encode($result);
     }
 
 
@@ -269,8 +271,12 @@ class Payments extends BaseController
             $result = "Not Properties to show";
         }
 
+        //return json_encode($result);
+/*        echo "<pre>";
+        print_r($result);
+        echo "</pre>";*/
 
-        return json_encode($result);
+        $data = ['data' => json_encode($result)];
         
     }
 
@@ -280,16 +286,33 @@ class Payments extends BaseController
             $db = db_connect();
             $model = new paymentModel($db);
 
-            
-            $data["fetch_data"] = $model->fetch_data($ownerID);
+            $owner = $model->isOwner($ownerID);
 
-/*            echo "<pre>";
-                print_r($data);
-            echo "</pre>";*/
+            if ($owner == true) {
+                
+          
 
             
-            return json_encode($data["fetch_data"]);
-             //echo view("payments_view1", $data);
+            $data2 = $model->fetch_data($ownerID);
+
+           echo "<pre>";
+                print_r($data2);
+            echo "</pre>";
+
+
+            $data = ['data' => json_encode($data2)];
+
+        }else
+        {
+            $data = ['data' => 'No Property Owner']; 
+        }
+
+
+            
+
+           // return json_encode($data['data']);
+     
+
        }
 
 

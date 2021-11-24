@@ -165,7 +165,13 @@ class PaymentModel
 //Fetching All Payments
         function fetch_data($ownerID)
         {
-            $query = $this->db->table("tbl_payments")->where(["senderID"=>$ownerID,])->orWhere("recipientID",$ownerID)->get()->getResult();
+            $query = $this->db->table("tbl_payments")
+                                ->select(' tbl_property.thumbnailPhoto,tbl_property.propertyDescription,tbl_payments.*')
+                                ->join('tbl_property','tbl_property.propertyID= tbl_payments.propertyID')
+                                ->where(["senderID"=>$ownerID,])
+                                ->orWhere("recipientID",$ownerID)
+                                ->get()
+                                ->getResult();
             return $query;
         }
 
