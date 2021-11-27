@@ -7,6 +7,41 @@
 
  - `/properties/?`
  >Gets properties belonging to single user
+- `/addProperty`
+<details open>
+ <summary>Request Body format</summary>
+ 
+```json
+{
+        "ownerID": "2",
+        "thumbnailPhoto": "test: path",
+        "propertyType": "Villa",
+        "propertyCounty": "Mombasa",
+        "propertyPhysicalAddress": "Tempore maxime dolo",
+        "propertyDescription": "Molestias culpa dolo",
+        "propertyRent": "Est incidunt doloru",
+        "otherImages": {
+          "1": "pic1.jpg",
+          "2": "pic2.jpg"
+        },
+        "dateBuilt": "24-12-2020",
+        "videoLink": "https://youtu.be/dQw4w9WgXcQ",
+        "propertySize": "15",
+        "landSize": "22",
+        "bedrooms": "5",
+        "bathrooms": "2",
+        "propertyFeatures": {
+          
+            "balcony":"1",
+            "security":"0",
+            "laundry":"0",
+            "elevator":"0",
+            "parking":"1"
+         
+        }
+      }
+```
+  </details>
 
 ----
 **Listings**
