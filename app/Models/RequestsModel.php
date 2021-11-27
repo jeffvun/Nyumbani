@@ -4,6 +4,17 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class RequestsModel extends Model{
+
+    protected $table = "tbl_requests";
+    protected $primaryKey = "requestID";
+
+    protected $allowedFields = [
+        'propertyID',
+        'requestMessage',
+       // 'requestStatus',
+        //'dateCompleted'
+    ];
+
     protected $db;
 
     public function __construct() {
