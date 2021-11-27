@@ -37,13 +37,18 @@ class Properties extends BaseController
 
         if($this->request->getMethod() == 'post'){
             $data = $this->request->getPost('filter');
-            $db = db_connect();
-            $pdetails = new PropertyDetails($db);
+            $pdetails = new PropertyDetails();
             $props = $pdetails->getPropertyStatistics($data);
             return $this->respond($props);
 
         }
         return view('charts');
+    }
+
+    public function propertyLocationChartData(){
+        $pdetails = new Property();
+        $props = $pdetails->getLocationStatistics();
+        return $this->respond($props);
     }
 
     

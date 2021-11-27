@@ -39,8 +39,8 @@ $routes->get('/listings/(:num)','Listing::getSingleListing/$1');
 
 
 
-$routes->match(['get','post'],'/addproperty/dummyview', 'AddProperty::dummyview');
-$routes->match(['get','post'],'/addproperty', 'AddProperty::index');
+$routes->match(['get','post'],'/addProperty/dummyview', 'AddProperty::dummyview');
+$routes->match(['get','post'],'/addProperty', 'AddProperty::index');
 //Small spelling error above changed - 'addpropery' to 'addproperty'
 
 $routes->get('/applications/(:num)','Applications/index/$1');

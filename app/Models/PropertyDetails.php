@@ -35,11 +35,24 @@ class PropertyDetails extends Model{
         //Filtering by verification status of properties
         else if ($id == 2){
             $data = ["labels" => ['Verified', 'Unverified'] ];
-            $query = $this->db->query('SELECT COUNT(*) AS total, isVerified FROM `tbl_property` GROUP BY (isVerified) ORDER BY isVerified DESC');
+            $query = $this->db->query('SELECT COUNT(*) AS total, isVerified FROM `tbl_property` WHERE isDeleted=0 GROUP BY (isVerified) ORDER BY isVerified DESC');
             foreach($query->getResult() as $entry){
                 array_push($values, $entry->total);
             }
             $data["numbers"] = $values;
+        }
+
+        else if ($id == 3){
+            $labels= [];
+            $query = $this->db->query('SELECT COUNT(*)as total, propertyType FROM `tbl_property` WHERE isDeleted = 0 GROUP BY propertyType');
+            foreach($query->getResult() as $entry){
+                array_push($values, $entry->total);
+                array_push($labels, $entry->propertyType);
+
+            }
+            $data["numbers"] = $values;
+            $data["labels"] = $labels;
+
         }
         
         return $data;
