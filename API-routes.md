@@ -8,7 +8,7 @@
  - `/properties/?`
  >Gets properties belonging to single user
 - `/addProperty`
-<details open>
+<details>
  <summary>Request Body format</summary>
  
 ```json
@@ -64,3 +64,82 @@
 
 - `/requests/?`
 >Gets all requests for a single property owner
+
+---
+**Transactions**
+
+- `/payments/?`
+>Gets payment history of a property
+<details>
+ <summary>Example:  /payments/10</summary>
+
+  ```json
+  {
+    "propertyID": "10",
+    "ownerID": "1",
+    "tenantID": "6",
+    "propertyDescription": "3 Bedroom Apartment in Nairobi",
+    "propertyCounty": "Nairobi",
+    "propertyPhysicalAddress": "Mzima Springs, Lavington",
+    "propertyType": "Apartment",
+    "thumbnailPhoto": "thumbnail1.jfif",
+    "rentDueDate": "1",
+    "dateRented": "2019-09-12",
+    "tenantFirstName": "Steve",
+    "tenantLastName": "Miller",
+    "tenantEmail": "smiller@gmail.com",
+    "payments": [
+        {
+            "paymentID": "1",
+            "propertyID": "10",
+            "senderID": "6",
+            "recipientID": "1",
+            "paymentMethod": "Rent",
+            "paymentDate": "2021-11-01",
+            "paymentAmount": "70000",
+            "status": "Paid"
+        },
+        {
+            "paymentID": "2",
+            "propertyID": "10",
+            "senderID": "6",
+            "recipientID": "1",
+            "paymentMethod": "Rent",
+            "paymentDate": "2021-10-01",
+            "paymentAmount": "70000",
+            "status": "Paid"
+        },
+        {
+            "paymentID": "3",
+            "propertyID": "10",
+            "senderID": "6",
+            "recipientID": "2",
+            "paymentMethod": "Rent",
+            "paymentDate": "2021-09-01",
+            "paymentAmount": "70000",
+            "status": "Pending"
+        }
+    ],
+    "rentStatus": "Overdue",
+    "rentArrears": -1610000
+}
+  ```
+  </details>
+  
+- `/payments/summary/?`
+>Gets transaction summary of single property owner
+
+<details>
+  <summary>Example: /payments/summary/1</summary>
+
+  ```json
+  {
+    "totalRentPaid-AllTime": 210000,
+    "totalExpectedRent": 5088000,
+    "monthlyExpectedRent": 284000,
+    "monthRentReturn": 70000,
+    "fromDate": "2019-09-12"
+}
+  ```
+  </details>
+
