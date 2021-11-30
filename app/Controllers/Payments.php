@@ -3,11 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\PaymentModel;
+use CodeIgniter\API\ResponseTrait;
 
 
 
 class Payments extends BaseController
 {
+    use ResponseTrait;
+
 
 /*HELPER FUNCTIONS START HERE*/
 
@@ -225,7 +228,8 @@ class Payments extends BaseController
         $data = ['data' => json_encode($result)];
  
         //If you want to output Stuff in your browser directly
-        //return json_encode($result);
+        return $this->respond($result);
+
     }
 
 
@@ -277,6 +281,8 @@ class Payments extends BaseController
         echo "</pre>";*/
 
         $data = ['data' => json_encode($result)];
+        return $this->respond($result);
+
         
     }
 
@@ -289,31 +295,29 @@ class Payments extends BaseController
             $owner = $model->isOwner($ownerID);
 
             if ($owner == true) {
-                
-          
-
-            
+                           
             $data2 = $model->fetch_data($ownerID);
 
-           echo "<pre>";
-                print_r($data2);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($data2);
+            // echo "</pre>"; die();
 
 
-            $data = ['data' => json_encode($data2)];
+            $data = ['data' => $data2];
 
-        }else
-        {
+        }
+        else{
             $data = ['data' => 'No Property Owner']; 
         }
 
 
             
 
-           // return json_encode($data['data']);
+        return $this->respond($data['data']);
+        // return json_encode($data['data']);
      
 
-       }
+    }
 
 
 }

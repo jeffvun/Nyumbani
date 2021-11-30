@@ -14,6 +14,8 @@ class PaymentModel
 	
 			$this->db = & $db;
 		}
+
+        
 // Function to query database to get details required for page 14 of the wireframes provided ---Stays
         public function extract($propertyID)
         {
@@ -170,6 +172,7 @@ class PaymentModel
                                 ->join('tbl_property','tbl_property.propertyID= tbl_payments.propertyID')
                                 ->where(["senderID"=>$ownerID,])
                                 ->orWhere("recipientID",$ownerID)
+                                ->orderBy('paymentDate', 'DESC')
                                 ->get()
                                 ->getResult();
             return $query;
@@ -193,6 +196,7 @@ class PaymentModel
             return $bool;
         }
 
+        //TODO add function to get payment status of all properties owned by a user
+
 
 }
-
