@@ -71,7 +71,7 @@
 - `/payments/?`
 >Gets payment history of a property
 <details>
- <summary>Example</summary>
+ <summary>Example:  /payments/10</summary>
 
   ```json
   {
