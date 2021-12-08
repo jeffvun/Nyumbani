@@ -8,7 +8,6 @@ class Requests extends BaseController{
 
     use ResponseTrait;
 
-
     public function index($id){
         $request = new RequestsModel(); 
         $results = $request->getRequests($id); 

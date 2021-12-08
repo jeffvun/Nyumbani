@@ -33,10 +33,10 @@ class Listing extends BaseController
         $property = new PropertyListingModel($db);
         $lists = $property->getAllListings();
 
-        // return $this->respond($lists);
+        return $this->respond($lists);
 
-        $data = ['listings'=>json_encode($lists)];
-        return view('browseListings', $data);
+        // $data = ['listings'=>json_encode($lists)];
+        // return view('browseListings', $data);
 
     }
 
@@ -45,10 +45,10 @@ class Listing extends BaseController
         $property = new PropertyListingModel($db);
         $lists = $property->getSingleListing($id);
 
-        // return $this->respond($lists);
+        return $this->respond($lists);
 
-        $data = ['listings'=>json_encode($lists)];
-        return view('browseListings', $data);
+        // $data = ['listings'=>json_encode($lists)];
+        // return view('browseListings', $data);
 
     }
 
