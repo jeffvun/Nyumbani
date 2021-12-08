@@ -33,6 +33,8 @@ class Users extends Model{
       $query = $builder->get();
       $array = $query->getResultArray();
 
+      $password="";
+      
       foreach ($query->getResultArray() as $row) {
           $password = $row['password'];
       }
